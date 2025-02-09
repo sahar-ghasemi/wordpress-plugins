@@ -6,14 +6,24 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         </head>
     <body>
-    
-        <div class="container mt-5">
+    <?php 
+    $arg=[
+        // "author"=>18
+        "author_name"=>"mina"
+        // "author"=>get_current_user_id()
+        // "cat"=>2
+    ];
+
+
+    $query=new WP_Query($arg);
+    ?>
+          <div class="container mt-5">
             <div class="row">
-                <?php if(have_posts()): ?>
-                    <?php while(have_posts()):the_post() ?>
+                <?php if($query->have_posts()): ?>
+                    <?php while($query->have_posts()):$query->the_post() ?>
                 <div class="col-4">
                     <div class="card p-2 bg-light text-start" style="border-radius: 10px;">
-                        <?php 
+                        <?php
                         if(has_post_thumbnail()){
                             the_post_thumbnail('full',[
                                 'class'=>'img-fluid'
